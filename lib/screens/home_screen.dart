@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:todo_app_riverpod/data/data.dart';
 import 'package:todo_app_riverpod/utils/utils.dart';
 import 'package:todo_app_riverpod/widgets/widgets.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,16 +22,16 @@ class HomeScreen extends StatelessWidget {
                 height: deviceSize.height * 0.3,
                 width: deviceSize.width,
                 color: colors.primary,
-                child: const Center(
+                child: Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       DisplayWhiteText(
-                        text: '23 Jan 2024',
+                        text: DateFormat('EEEE, d MMMM yyyy').format(DateTime.now()),
                         fontSize: 20,
                       ),
-                      DisplayWhiteText(
-                        text: 'My Todo List',
+                      const DisplayWhiteText(
+                        text: "Getir Bi'todo",
                         fontSize: 40,
                         fontWeight: FontWeight.bold,
                       ),
@@ -50,14 +52,58 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const DisplayListOfTask(
-                      tasks: [],
+                    DisplayListOfTask(
+                      tasks: [
+                        Task(
+                          title: 'titleLarge',
+                          description: 'description',
+                          date: DateTime.now(),
+                          category: TaskCategories.education,
+                          isDone: false,
+                        ),
+                        Task(
+                          title: 'Task 2',
+                          description: 'description',
+                          date: DateTime.now(),
+                          category: TaskCategories.work,
+                          isDone: false,
+                        ),
+                        Task(
+                          title: 'Task 3',
+                          description: 'description',
+                          date: DateTime.now(),
+                          category: TaskCategories.health,
+                          isDone: false,
+                        )
+                      ],
                     ),
                     const Gap(20),
                     Text('Completed', style: context.textTheme.headlineMedium),
                     const Gap(20),
-                    const DisplayListOfTask(
-                      tasks: [],
+                    DisplayListOfTask(
+                      tasks: [
+                        Task(
+                          title: 'Task 4',
+                          description: 'description',
+                          date: DateTime.now(),
+                          category: TaskCategories.others,
+                          isDone: false,
+                        ),
+                        Task(
+                          title: 'Task 5',
+                          description: 'description',
+                          date: DateTime.now(),
+                          category: TaskCategories.personal,
+                          isDone: false,
+                        ),
+                        Task(
+                          title: 'Task 6',
+                          description: 'description',
+                          date: DateTime.now(),
+                          category: TaskCategories.shopping,
+                          isDone: false,
+                        )
+                      ],
                       isDone: true,
                     ),
                     const Gap(20),

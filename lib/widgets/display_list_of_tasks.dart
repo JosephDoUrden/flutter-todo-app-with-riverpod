@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:todo_app_riverpod/utils/utils.dart';
 import 'package:todo_app_riverpod/widgets/widgets.dart';
 
@@ -29,15 +30,17 @@ class DisplayListOfTask extends StatelessWidget {
                 style: context.textTheme.headlineSmall,
               ),
             )
-          : ListView.builder(
-              itemBuilder: (ctx, index) {
-                return ListTile(
-                  title: Text('Todo $index'),
-                );
-              },
+          : ListView.separated(
               itemCount: tasks.length,
               shrinkWrap: true,
-              padding: EdgeInsets.zero,
+              padding: const EdgeInsets.only(top: 10, left: 16, bottom: 10),
+              itemBuilder: (ctx, index) {
+                final task = tasks[index];
+                return TaskTile(task: task);
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const Gap(10);
+              },
             ),
     );
   }
