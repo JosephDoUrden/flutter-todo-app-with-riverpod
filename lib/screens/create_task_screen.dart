@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_app_riverpod/widgets/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CreateTaskScreen extends StatelessWidget {
   static CreateTaskScreen builder(BuildContext context, GoRouterState state) => const CreateTaskScreen();
@@ -21,17 +22,7 @@ class CreateTaskScreen extends StatelessWidget {
           children: [
             const CommonTextField(taskTitle: 'Task Title', hintText: 'Enter task title'),
             const Gap(16),
-            const Row(
-              children: [
-                Expanded(
-                  child: CommonTextField(taskTitle: 'Date', hintText: 'Aug 07'),
-                ),
-                Gap(16),
-                Expanded(
-                  child: CommonTextField(taskTitle: 'Time', hintText: '10:30'),
-                ),
-              ],
-            ),
+            const SelectDateTime(),
             const Gap(16),
             const CommonTextField(
               taskTitle: 'Description',
@@ -44,6 +35,7 @@ class CreateTaskScreen extends StatelessWidget {
               child: const DisplayWhiteText(
                 text: 'Create Task',
                 fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
