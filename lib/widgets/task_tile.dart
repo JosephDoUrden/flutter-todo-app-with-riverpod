@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_app_riverpod/data/data.dart';
 import 'package:todo_app_riverpod/utils/utils.dart';
+import 'package:todo_app_riverpod/widgets/widgets.dart';
 
 class TaskTile extends StatelessWidget {
   const TaskTile({super.key, required this.task, this.onCompleted});
@@ -19,16 +20,8 @@ class TaskTile extends StatelessWidget {
 
     return Row(
       children: [
-        Container(
-          padding: const EdgeInsets.all(9),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: task.category.color.withOpacity(backgroundOpacity),
-            border: Border.all(
-              color: task.category.color.withOpacity(iconOpacity),
-              width: 2,
-            ),
-          ),
+        CircleContainer(
+          color: task.category.color.withOpacity(backgroundOpacity),
           child: Center(
             child: Icon(
               task.category.icon,
