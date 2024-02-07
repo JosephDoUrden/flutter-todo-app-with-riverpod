@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+
 import 'package:todo_app_riverpod/utils/utils.dart';
 
 class Task extends Equatable {
@@ -49,6 +51,24 @@ class Task extends Equatable {
       date: map[TaskKeys.date],
       category: TaskCategories.stringToCategory(map[TaskKeys.category]),
       isDone: map['isDone'] as bool,
+    );
+  }
+
+  Task copyWith({
+    int? id,
+    String? title,
+    String? description,
+    DateTime? date,
+    TaskCategories? category,
+    bool? isDone,
+  }) {
+    return Task(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      date: date ?? this.date,
+      category: category ?? this.category,
+      isDone: isDone ?? this.isDone,
     );
   }
 }
