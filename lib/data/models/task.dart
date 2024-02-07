@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:todo_app_riverpod/utils/utils.dart';
 
@@ -29,5 +28,27 @@ class Task extends Equatable {
       category,
       isDone,
     ];
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      TaskKeys.id: id,
+      TaskKeys.title: title,
+      TaskKeys.description: description,
+      TaskKeys.date: date,
+      TaskKeys.category: category.name,
+      TaskKeys.isDone: isDone,
+    };
+  }
+
+  factory Task.fromJson(Map<String, dynamic> map) {
+    return Task(
+      id: map[TaskKeys.id],
+      title: map[TaskKeys.title],
+      description: map[TaskKeys.description],
+      date: map[TaskKeys.date],
+      category: TaskCategories.stringToCategory(map[TaskKeys.category]),
+      isDone: map['isDone'] as bool,
+    );
   }
 }
