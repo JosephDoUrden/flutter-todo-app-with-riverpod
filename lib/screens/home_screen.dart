@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:go_router/go_router.dart';
+import 'package:todo_app_riverpod/config/router/router.dart';
 import 'package:todo_app_riverpod/data/data.dart';
 import 'package:todo_app_riverpod/utils/utils.dart';
 import 'package:todo_app_riverpod/widgets/widgets.dart';
 import 'package:intl/intl.dart';
 
 class HomeScreen extends StatelessWidget {
+  static HomeScreen builder(BuildContext context, GoRouterState state) => const HomeScreen();
   const HomeScreen({super.key});
 
   @override
@@ -108,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const Gap(20),
                     ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () => context.push(RouteLocation.create),
                         child: const Padding(
                           padding: EdgeInsets.all(8.0),
                           child: DisplayWhiteText(
