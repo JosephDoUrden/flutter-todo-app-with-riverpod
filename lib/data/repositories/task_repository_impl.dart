@@ -8,7 +8,7 @@ class TaskRepositoryImpl implements TaskRepository {
   @override
   Future<void> createTask(Task task) async {
     try {
-      await _datasource.addTask(task);
+      await _datasource.createTask(task);
     } catch (e) {
       rethrow;
     }

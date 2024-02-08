@@ -11,9 +11,9 @@ enum TaskCategories {
   travel(Icons.flight, Colors.indigo),
   others(Icons.category, Colors.grey);
 
-  static TaskCategories stringToCategory(String category) {
+  static TaskCategories stringToTaskCategory(String name) {
     try {
-      return TaskCategories.values.firstWhere((category) => category.name == category);
+      return TaskCategories.values.firstWhere((category) => category.name == name);
     } catch (e) {
       return TaskCategories.others;
     }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
 import 'package:todo_app_riverpod/data/data.dart';
 import 'package:todo_app_riverpod/utils/utils.dart';
 import 'package:todo_app_riverpod/widgets/widgets.dart';
@@ -34,7 +33,7 @@ class TaskDetails extends StatelessWidget {
             ),
           ),
           Text(
-            DateFormat.yMMMMd().format(task.date),
+            task.date,
             style: style.titleMedium,
           ),
           const Gap(16),
@@ -58,7 +57,7 @@ class TaskDetails extends StatelessWidget {
               : Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('task to be completed on ${DateFormat.yMMMMd().format(task.date)}'),
+                    Text('task to be completed on ${task.date}'),
                     Icon(Icons.check_box, color: task.category.color),
                   ],
                 ),

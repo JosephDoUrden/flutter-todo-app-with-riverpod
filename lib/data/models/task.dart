@@ -7,7 +7,8 @@ class Task extends Equatable {
   final int? id;
   final String title;
   final String description;
-  final DateTime date;
+  final String date;
+  final String time;
   final TaskCategories category;
   final bool isDone;
 
@@ -16,6 +17,7 @@ class Task extends Equatable {
     required this.title,
     required this.description,
     required this.date,
+    required this.time,
     required this.category,
     required this.isDone,
   });
@@ -27,6 +29,7 @@ class Task extends Equatable {
       title,
       description,
       date,
+      time,
       category,
       isDone,
     ];
@@ -38,8 +41,9 @@ class Task extends Equatable {
       TaskKeys.title: title,
       TaskKeys.description: description,
       TaskKeys.date: date,
+      TaskKeys.time: time,
       TaskKeys.category: category.name,
-      TaskKeys.isDone: isDone,
+      TaskKeys.isDone: isDone ? 1 : 0,
     };
   }
 
@@ -49,8 +53,9 @@ class Task extends Equatable {
       title: map[TaskKeys.title],
       description: map[TaskKeys.description],
       date: map[TaskKeys.date],
-      category: TaskCategories.stringToCategory(map[TaskKeys.category]),
-      isDone: map['isDone'] as bool,
+      time: map[TaskKeys.time],
+      category: TaskCategories.stringToTaskCategory(map[TaskKeys.category]),
+      isDone: map['isDone'] == 1 ? true : false,
     );
   }
 
@@ -58,7 +63,8 @@ class Task extends Equatable {
     int? id,
     String? title,
     String? description,
-    DateTime? date,
+    String? date,
+    String? time,
     TaskCategories? category,
     bool? isDone,
   }) {
@@ -67,6 +73,7 @@ class Task extends Equatable {
       title: title ?? this.title,
       description: description ?? this.description,
       date: date ?? this.date,
+      time: time ?? this.time,
       category: category ?? this.category,
       isDone: isDone ?? this.isDone,
     );

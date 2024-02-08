@@ -38,13 +38,14 @@ class TaskDatasource {
         ${DBKeys.titleColumn} TEXT,
         ${DBKeys.categoryColumn} TEXT,
         ${DBKeys.dateColumn} TEXT,
+        ${DBKeys.timeColumn} TEXT,
         ${DBKeys.descriptionColumn} TEXT,
-        ${DBKeys.isDoneColumn} TEXT,
+        ${DBKeys.isDoneColumn} INTEGER
       )
     ''');
   }
 
-  Future<int> addTask(Task task) async {
+  Future<int> createTask(Task task) async {
     final db = await database;
     return db.transaction(
       (txn) async {

@@ -1,11 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:todo_app_riverpod/config/router/router.dart';
+import 'package:todo_app_riverpod/data/data.dart';
+import 'package:todo_app_riverpod/providers/providers.dart';
+import 'package:todo_app_riverpod/utils/utils.dart';
 import 'package:todo_app_riverpod/widgets/widgets.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CreateTaskScreen extends StatelessWidget {
-  static CreateTaskScreen builder(BuildContext context, GoRouterState state) => const CreateTaskScreen();
-  const CreateTaskScreen({super.key});
+class CreateTaskScreen extends ConsumerStatefulWidget {
+  static CreateTaskScreen builder(
+    BuildContext context,
+    GoRouterState state,
+  ) =>
+      const CreateTaskScreen();
+
+  const CreateTaskScreen({Key? key}) : super(key: key);
+
+  @override
+  _CreateTaskScreenState createState() => _CreateTaskScreenState();
+}
+
+class _CreateTaskScreenState extends ConsumerState<CreateTaskScreen> {
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+
+  @override
+  void dispose() {
+    _titleController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,16 +46,21 @@ class CreateTaskScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const CommonTextField(taskTitle: 'Task Title', hintText: 'Enter task title'),
+              CommonTextField(
+                taskTitle: 'Task Title',
+                hintText: 'Enter task title',
+                controller: _titleController,
+              ),
               const Gap(16),
               const SelectCategory(),
               const Gap(16),
               const SelectDateTime(),
               const Gap(16),
-              const CommonTextField(
+              CommonTextField(
                 taskTitle: 'Description',
                 hintText: 'Enter task description',
                 maxLines: 6,
+                controller: _descriptionController,
               ),
               const Gap(16),
               ElevatedButton(
@@ -39,7 +70,7 @@ class CreateTaskScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: _createTask,
                 child: const DisplayWhiteText(
                   text: 'Create Task',
                   fontSize: 20,
@@ -51,5 +82,30 @@ class CreateTaskScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _createTask() async {
+    final title = _titleController.text.trim();
+    final description = _descriptionController.text.trim();
+    final category = ref.watch(categoryProvider);
+    final date = ref.watch(dateProvider);
+    final time = ref.watch(timeProvider);
+    if (title.isNotEmpty) {
+      final task = Task(
+        title: title,
+        description: description,
+        date: DateFormat.yMMMd().format(date),
+        time: time.format(context),
+        category: category,
+        isDone: false,
+      );
+
+      await ref.read(taskProvider.notifier).createTask(task).then((value) {
+        AppAlerts.displaySnackBar(context, 'Task created successfully');
+        context.go(RouteLocation.home);
+      });
+    } else {
+      AppAlerts.displaySnackBar(context, 'Task title cannot be empty');
+    }
   }
 }

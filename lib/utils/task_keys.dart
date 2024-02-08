@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show immutable;
 
+@immutable
 class TaskKeys {
   const TaskKeys._();
   static const String id = 'id';
@@ -7,5 +8,6 @@ class TaskKeys {
   static const String category = 'category';
   static const String description = 'description';
   static const String date = 'date';
+  static const String time = 'time';
   static const String isDone = 'isDone';
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
-import 'package:intl/intl.dart';
 import 'package:todo_app_riverpod/data/data.dart';
 import 'package:todo_app_riverpod/utils/utils.dart';
 import 'package:todo_app_riverpod/widgets/widgets.dart';
@@ -43,7 +42,7 @@ class TaskTile extends StatelessWidget {
                 ),
               ),
               Text(
-                DateFormat.yMMMMd().format(task.date),
+                task.date,
                 style: style.titleMedium?.copyWith(
                   decoration: textDecoration,
                 ),
