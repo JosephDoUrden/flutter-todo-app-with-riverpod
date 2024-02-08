@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:todo_app_riverpod/utils/utils.dart';
 import 'package:todo_app_riverpod/widgets/widgets.dart';
 
 import '../data/data.dart';
 
-class DisplayListOfTask extends StatelessWidget {
+class DisplayListOfTask extends ConsumerWidget {
   const DisplayListOfTask({
     super.key,
     required this.tasks,
@@ -16,7 +17,7 @@ class DisplayListOfTask extends StatelessWidget {
   final bool isDone;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final deviceSize = context.deviceSize;
     final height = isDone ? deviceSize.height * 0.25 : deviceSize.height * 0.3;
     final emptyTaskMessage = isDone ? 'No completed task' : 'No task yet';
@@ -38,11 +39,9 @@ class DisplayListOfTask extends StatelessWidget {
                 final task = tasks[index];
                 return InkWell(
                   onLongPress: () {
-                    //TODO: Delete Task
+                    AppAlerts.showDeleteAlertDialog(context, ref, task);
                   },
                   onTap: () async {
-                    //TODO: Show task details
-
                     await showModalBottomSheet(
                         context: context,
                         builder: (ctx) {
