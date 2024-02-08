@@ -32,9 +32,18 @@ class TaskDetails extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
-            task.date,
-            style: style.titleMedium,
+          Row(
+            children: [
+              Text(
+                task.time,
+                style: style.titleMedium,
+              ),
+              const Gap(6),
+              Text(
+                task.date,
+                style: style.titleMedium,
+              ),
+            ],
           ),
           const Gap(16),
           Text(

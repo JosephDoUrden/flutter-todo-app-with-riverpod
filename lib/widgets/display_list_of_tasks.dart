@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
+import 'package:todo_app_riverpod/providers/providers.dart';
 import 'package:todo_app_riverpod/utils/utils.dart';
 import 'package:todo_app_riverpod/widgets/widgets.dart';
 
@@ -48,7 +49,12 @@ class DisplayListOfTask extends ConsumerWidget {
                           return TaskDetails(task: task);
                         });
                   },
-                  child: TaskTile(task: task),
+                  child: TaskTile(
+                    task: task,
+                    onCompleted: (value) async {
+                      await ref.read(taskProvider.notifier).updateTask(task);
+                    },
+                  ),
                 );
               },
               separatorBuilder: (BuildContext context, int index) {
